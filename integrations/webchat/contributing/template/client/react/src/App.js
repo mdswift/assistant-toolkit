@@ -7,10 +7,9 @@ import { config } from './config';
 /**
  * This example uses the `@ibm-watson/assistant-web-chat-react` library to import web chat into a React application.
  *
- * See https://www.npmjs.com/package/@ibm-watson/assistant-web-chat-react
+ * See https://www.npmjs.com/package/@ibm-watson/assistant-web-chat-react.
  *
  * TODO: ADD A COMMENT HERE ABOUT HOW TO FIND THE SPECIAL CODE YOU HAVE ADDED FOR THIS EXAMPLE.
- *
  */
 
 function App({ createWebChatInstance }) {
@@ -19,7 +18,7 @@ function App({ createWebChatInstance }) {
       instance.render();
     }
 
-    // A web chat configuration options object as documented at https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=api-configuration#configurationobject.
+    // Add the onLoad handler to the existing web chat options in the external config.js file.
     const webChatOptions = {
       ...config,
       onLoad: onWebChatLoad,
@@ -27,7 +26,7 @@ function App({ createWebChatInstance }) {
 
     createWebChatInstance(webChatOptions);
   }, []);
-  return <div className="App" />;
+  return <div className="App">Hello World!</div>;
 }
 
 App.propTypes = {
