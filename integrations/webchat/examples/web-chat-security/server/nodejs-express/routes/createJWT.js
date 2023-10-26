@@ -15,7 +15,7 @@ const router = express.Router();
 // *** DO NOT USE THE PUBLIC AND PRIVATE KEYS FROM THIS EXAMPLE FOR PRODUCTION USE! ***
 
 // This is your private key that you will keep on your server. This is used to sign the jwt. You will paste your public
-// key into the appropriate field on the Security tab of the web chat settings page. Watson Assistant will use your
+// key into the appropriate field on the Security tab of the web chat settings page. IBM watsonx Assistant will use your
 // public key to validate the signature on the jwt.
 const PRIVATE_KEY = fs.readFileSync(path.join(__dirname, '../keys/example-jwtRS256.key'));
 
@@ -30,16 +30,19 @@ const TIME_45_DAYS = 1000 * 60 * 60 * 24 * 45;
 /**
  * Generates a signed JWT. The JWT used here will always be assigned a user ID using the given anonymous user ID. If
  * the user is authenticated and we have session info, then info about the user will also be added to the JWT. We
- * always use the anonymous user ID even if the user is authenticated because Watson Assistant doesn't allow you to
+ * always use the anonymous user ID even if the user is authenticated because IBM watsonx Assistant doesn't allow you to
  * change the user ID in the middle of a session.
  */
 function createJWTString(anonymousUserID, sessionInfo) {
   // This is the content of the JWT. You would normally look up the user information from a user profile.
   const jwtContent = {
     // This is the subject of the JWT which will be the ID of the user.
+    //
+    // This user ID will be available under integrations.channel.private.user.id in dialog and
+    // system_integrations.channel.private.user.id in actions.
     sub: anonymousUserID,
     // This object is optional and contains any data you wish to include as part of the JWT. This data will be
-    // encrypted using IBM's public key so it will not be visible to your users. Watson Assistant will decrypt this
+    // encrypted using IBM's public key so it will not be visible to your users. IBM watsonx Assistant will decrypt this
     // data and make it available to use in your assistant.
     user_payload: {
       custom_message: 'This is a secret, encrypted message!',
